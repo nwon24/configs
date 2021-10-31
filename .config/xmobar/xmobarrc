@@ -1,0 +1,24 @@
+Config { overrideRedirect = False
+       , font     = "xft:Ubuntu Mono:pixelsize=16"
+       , bgColor  = "black"
+       , fgColor  = "lightgrey"
+       , position = Top
+       , commands = [ Run Cpu
+                        [ "-t", "Cpu: <total>%"
+                        ] 10
+                    , Run Alsa "default" "Master"
+                        [ "-t", "Vol: <volumestatus>"
+                        , "--suffix" , "True"
+                        , "--", "--on", ""
+                        ] 
+                    , Run BatteryP ["BAT0"]
+                        [ "-t", "Bat: <left>%" ] 600
+                    , Run Memory ["-t", "Mem: <usedratio>%"] 10
+                    , Run Swap [] 10
+                    , Run Date "%a %Y-%m-%d %H:%M" "date" 10
+                    , Run XMonadLog
+                    ]
+       , sepChar  = "%"
+       , alignSep = "}{" 
+       , template = "%XMonadLog% }{ %alsa:default:Master% | %battery% | %cpu% | %memory% * %swap% | %date% "
+       }
