@@ -9,17 +9,33 @@ EDITOR=vim
 
 alias ls='ls --color=auto'
 alias grep='grep --color=auto'
-alias egrep='grep --color=auto'
+alias egrep='egrep --color=auto'
 alias fgrep='fgrep --color=auto'
 alias diff='diff --color=auto'
 
-[ ! -e $HOME/.dircolors ] && eval $(dircolors -p > $HOME/.dircolors)
-[ -e $HOME/.dircolors ] && eval $(dircolors -b $HOME/.dircolors)
+alias ..='cd ..'
+
+alias rm='rm -i'
+alias cp='cp -i'
+alias mv='mv -i'
 
 PS1='[\u@\h \W]\$ '
 
-alias config='git --git-dir=$HOME/dotfiles --work-tree=$HOME'
+# Set PATH
+if [ -d $HOME/.local/bin ]; then
+    PATH=$HOME/.local/bin:$PATH
+fi
 
-[[ -e $HOME/.local/bin ]] && eval $(PATH=$HOME/.local/bin:$PATH)
+if [ -d $HOME/.bin ]; then
+    PATH=$HOME/.bin:$PATH
+fi
 
-export PATH EDITOR
+if [ -d $HOME/opt/bin ]; then
+    PATH=$HOME/opt/bin:$PATH
+fi
+
+# Extended color support for ls
+[ ! -e $HOME/.dircolors ] && eval $(dircolors -p > $HOME/.dircolors)
+[ -e $HOME/.dircolors ] && eval $(dircolors -b $HOME/.dircolors)
+
+export EDITOR PATH
