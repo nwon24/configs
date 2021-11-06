@@ -1,24 +1,32 @@
 Config { overrideRedirect = False
-       , font     = "xft:Ubuntu Mono:pixelsize=16"
-       , bgColor  = "black"
-       , fgColor  = "lightgrey"
+       , font     = "xft:Ubuntu:pixelsize=14:antialias=true:hinting=true"
+       , bgColor  = "#282a36"
+       , fgColor  = "#f8f8f2"
        , position = Top
        , commands = [ Run Cpu
-                        [ "-t", "Cpu: <total>%"
+                        [ "-L", "3"
+                        , "-H", "50"
+                        , "--high"  , "red"
+                        , "--normal", "green"
                         ] 10
                     , Run Alsa "default" "Master"
-                        [ "-t", "Vol: <volumestatus>"
-                        , "--suffix" , "True"
-                        , "--", "--on", ""
-                        ] 
+                        [ "--template", "Vol: <volumestatus>"
+                        , "--suffix"  , "True"
+                        , "--"
+                        , "--on", ""
+                        ]
                     , Run BatteryP ["BAT0"]
-                        [ "-t", "Bat: <left>%" ] 600
-                    , Run Memory ["-t", "Mem: <usedratio>%"] 10
+                        [ "-t", "Bat: <left>%"
+                        , "-L", "5", "-H", "90"
+                        , "--high", "green"
+                        , "--low", "red"
+                        ] 600
+                    , Run Memory ["--template", "Mem: <usedratio>%"] 10
                     , Run Swap [] 10
-                    , Run Date "%a %Y-%m-%d %H:%M" "date" 10
-                    , Run XMonadLog
+                    , Run Date "%a %d-%m-%Y <fc=#8be9fd>%H:%M</fc>" "date" 10
+                    , Run StdinReader
                     ]
        , sepChar  = "%"
-       , alignSep = "}{" 
-       , template = "%XMonadLog% }{ %alsa:default:Master% | %battery% | %cpu% | %memory% * %swap% | %date% "
+       , alignSep = "}{"
+       , template = "%StdinReader% }{ %battery% | %alsa:default:Master% | %cpu% | %memory% * %swap% | %date% "
        }
