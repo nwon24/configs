@@ -64,7 +64,7 @@
 ;; Programming langauge stuff
 (defun my-c-mode-hook ()
   (setq c-basic-offset 8))
-(add-hook 'c-hook 'my-c-mode-hook)
+(add-hook 'c-mode-hook 'my-c-mode-hook)
 (defun my-asm-mode-hook ()
   (if (string-equal (file-name-extension (buffer-file-name)) "S")
       (progn
