@@ -34,18 +34,34 @@
 
 (use-package zenburn-theme
   :ensure t)
-(load-theme 'zenburn t)
+(use-package gruber-darker-theme
+  :ensure t)
+;;(load-theme 'zenburn t)
+(load-theme 'gruber-darker t)
 (use-package magit
   :ensure t)
+(use-package nasm-mode
+  :ensure t)
+(use-package multiple-cursors
+  :ensure t)
 
-(setq user-init-file "~/.emacs.d/init.el")
+(require 'multiple-cursors)
+(global-set-key (kbd "C-S-c C-S-c") 'mc/edit-lines)
+(global-set-key (kbd "C->") 'mc/mark-next-like-this)
+(global-set-key (kbd "C-<") 'mc/mark-previous-like-this)
+(global-set-key (kbd "C-c C-<") 'mc/mark-all-like-this)
+
 (defun my/set-init-file (name)
+  "Set name of Emacs init file"
   (interactive)
   (setq user-init-file name))
 (defun my/reload-init-file ()
   (interactive)
   (load-file user-init-file))
+
 (global-set-key (kbd "C-c r") 'my/reload-init-file)
+
+(global-set-key (kbd "C-c c") 'compile)
 
 ;; Stop Emacs littering directories with autosave files
 (setq backup-directory-alist
@@ -54,6 +70,12 @@
 ;; Uncomment desired font
 (add-to-list 'default-frame-alist '(font . "Iosevka Fixed SS01-14"))
 (set-face-attribute 'default nil :font "Iosevka Fixed SS01-14")
+
+;;(add-to-list 'default-frame-alist '(font . "Liberation Mono-14"))
+;;(set-face-attribute 'default nil :font "Liberation Mono-14")
+
+;;(add-to-list 'default-frame-alist '(font . "Fira Code-12"))
+;;(set-face-attribute 'default nil :font "Fira Code-12")
 
 ;;(add-to-list 'default-frame-alist '(font . "Ubuntu Mono-14"))
 ;;(set-face-attribute 'default nil :font "Ubuntu Mono-14")
@@ -70,7 +92,7 @@
       (progn
 	(setq asm-comment-char ?#)
 	(local-unset-key ?\;)
-	(local-set-key ?\; 'asm-comment))
+	(local-set-key asm-comment-char 'asm-comment))
     (setq asm-comment-char ?\;)))
 (add-hook 'asm-mode-hook 'my-asm-mode-hook)
 
@@ -81,7 +103,11 @@
  ;; If you edit it by hand, you could mess it up, so be careful.
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
- '(package-selected-packages '(magit zenburn-theme use-package)))
+ '(custom-safe-themes
+   '("03e26cd42c3225e6376d7808c946f7bed6382d795618a82c8f3838cd2097a9cc" "3b8284e207ff93dfc5e5ada8b7b00a3305351a3fb222782d8033a400a48eca48" default))
+ '(frame-brackground-mode 'dark)
+ '(package-selected-packages
+   '(multiple-cursors fasm-mode magit zenburn-theme use-package)))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
