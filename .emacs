@@ -32,12 +32,18 @@
 (unless (package-installed-p 'use-package)
   (package-install 'use-package))
 
+;; Some nice themes
 (use-package zenburn-theme
   :ensure t)
 (use-package gruber-darker-theme
   :ensure t)
+(use-package doom-themes
+  :ensure t)
 (load-theme 'zenburn t)
 ;;(load-theme 'gruber-darker t)
+;;(load-theme 'doom-one t)
+
+;; Other useful packages
 (use-package magit
   :ensure t)
 (use-package nasm-mode
@@ -64,13 +70,27 @@
 (setq projectile-completion-system 'ivy)
 (projectile-mode +1)
 
-(defun my/set-init-file (name)
-  "Set name of Emacs init file"
-  (interactive)
-  (setq user-init-file name))
 (defun my/reload-init-file ()
   (interactive)
   (load-file user-init-file))
+
+(defun my/move-line-down (n)
+  (interactive "p")
+  (while (> n 0)
+    (next-line)
+    (transpose-lines 1)
+    (previous-line)
+    (setq n (1- n))))
+
+(defun my/move-line-up (n)
+  (interactive "p")
+  (while (> n 0)
+    (transpose-lines 1)
+    (previous-line 2)
+    (setq n (1- n))))
+
+(global-set-key (kbd "C-c C-n") 'my/move-line-down)
+(global-set-key (kbd "C-c C-p") 'my/move-line-up)
 
 (global-set-key (kbd "C-c r") 'my/reload-init-file)
 
@@ -96,8 +116,13 @@
 ;;(add-to-list 'default-frame-alist '(font . "Inconsolata-14"))
 ;;(set-face-attribute 'default nil :font "Inconsolata-14")
 
+;;(add-to-list 'default-frame-alist '(font . "Source Code Pro-14"))
+;;(set-face-attribute 'default nil :font "Source Code Pro-14")
+
 ;; Programming langauge stuff
 (defun my-c-mode-hook ()
+  (local-unset-key (kbd "C-c C-p"))
+  (local-unset-key (kbd "C-c C-n"))
   (setq c-basic-offset 8))
 (add-hook 'c-mode-hook 'my-c-mode-hook)
 
@@ -109,10 +134,22 @@
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
  '(custom-safe-themes
-   '("03e26cd42c3225e6376d7808c946f7bed6382d795618a82c8f3838cd2097a9cc" "3b8284e207ff93dfc5e5ada8b7b00a3305351a3fb222782d8033a400a48eca48" default))
+   '("835868dcd17131ba8b9619d14c67c127aa18b90a82438c8613586331129dda63" "03e26cd42c3225e6376d7808c946f7bed6382d795618a82c8f3838cd2097a9cc" "3b8284e207ff93dfc5e5ada8b7b00a3305351a3fb222782d8033a400a48eca48" default))
+ '(exwm-floating-border-color "#191b20")
  '(frame-brackground-mode 'dark)
+ '(highlight-tail-colors
+   ((("#333a38" "#99bb66" "green")
+     . 0)
+    (("#2b3d48" "#46D9FF" "brightcyan")
+     . 20)))
+ '(jdee-db-active-breakpoint-face-colors (cons "#1B2229" "#51afef"))
+ '(jdee-db-requested-breakpoint-face-colors (cons "#1B2229" "#98be65"))
+ '(jdee-db-spec-breakpoint-face-colors (cons "#1B2229" "#3f444a"))
+ '(objed-cursor-color "#ff6c6b")
  '(package-selected-packages
-   '(neotree emacs-neotree projectile multiple-cursors fasm-mode magit zenburn-theme use-package)))
+   '(neotree emacs-neotree projectile multiple-cursors fasm-mode magit zenburn-theme use-package))
+ '(rustic-ansi-faces
+   ["#282c34" "#ff6c6b" "#98be65" "#ECBE7B" "#51afef" "#c678dd" "#46D9FF" "#bbc2cf"]))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
