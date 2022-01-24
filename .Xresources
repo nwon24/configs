@@ -1,5 +1,5 @@
 XTerm.vt100.faceName: Iosevka SS01
-XTerm.vt100.faceSize: 11
+XTerm.vt100.faceSize: 14
 XTerm.vt100.metaSendsEscape: true
 XTerm.vt100.selectToClipboard: true
 XTerm.vt100.translations: #override \n\
