@@ -1,5 +1,5 @@
 Config { overrideRedirect = False
-       , font     = "xft:Ubuntu:pixelsize=14:antialias=true:hinting=true"
+       , font     = "xft:Iosevka Term SS01:pixelsize=14"
        , bgColor  = "#282a36"
        , fgColor  = "#f8f8f2"
        , position = Top
