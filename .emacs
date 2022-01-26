@@ -22,6 +22,10 @@
 (when (not server-name)
   (server-start))
 
+(setq ido-enable-flex-matching t)
+(setq ido-everywhere t)
+(ido-mode 1)
+
 ;; A few useful packages
 (require 'package)
 (add-to-list 'package-archives
@@ -89,11 +93,21 @@
     (previous-line 2)
     (setq n (1- n))))
 
+(defun my/dup-line (n)
+  (interactive "p")
+  (while (> n 0)
+    (move-beginning-of-line 1)
+    (kill-line)
+    (yank)
+    (newline)
+    (yank)
+    (setq n (1- n))))
+
 (global-set-key (kbd "C-c C-n") 'my/move-line-down)
 (global-set-key (kbd "C-c C-p") 'my/move-line-up)
-
+(global-set-key (kbd "C-'") 'my/dup-line)
+(global-set-key (kbd "C-;") 'kill-whole-line)
 (global-set-key (kbd "C-c r") 'my/reload-init-file)
-
 (global-set-key (kbd "C-c c") 'compile)
 
 ;; Stop Emacs littering directories with autosave files
