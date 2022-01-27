@@ -15,7 +15,7 @@
 ;; Relative line numbers if supported
 (when (version<= "26.0.50" emacs-version)
   (global-display-line-numbers-mode)
-  (setq display-line-numbers 'relative))
+  (setq display-line-numbers-type 'relative))
 
 ;; Start server if not already started
 (require 'server)
@@ -101,8 +101,8 @@
       `(("." . ,(concat user-emacs-directory "backups"))))
 
 ;; Uncomment desired font
-(add-to-list 'default-frame-alist '(font . "Iosevka Term SS01-14"))
-(set-face-attribute 'default nil :font "Iosevka Term SS01-14")
+(add-to-list 'default-frame-alist '(font . "Iosevka Term-14"))
+(set-face-attribute 'default nil :font "Iosevka Term-14")
 
 ;;(add-to-list 'default-frame-alist '(font . "Liberation Mono-14"))
 ;;(set-face-attribute 'default nil :font "Liberation Mono-14")
