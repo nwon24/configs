@@ -63,6 +63,10 @@
   :ensure t)
 (global-set-key (kbd "C-c t") 'neotree-toggle)
 
+(use-package easy-kill
+  :ensure t)
+(global-set-key [remap kill-ring-save] 'easy-kill)
+
 (require 'multiple-cursors)
 (global-set-key (kbd "C-S-c C-S-c") 'mc/edit-lines)
 (global-set-key (kbd "C->") 'mc/mark-next-like-this)
