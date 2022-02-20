@@ -110,8 +110,8 @@
     (yank)
     (setq n (1- n))))
 
-(global-set-key (kbd "C-c C-n") 'my/move-line-down)
-(global-set-key (kbd "C-c C-p") 'my/move-line-up)
+(global-set-key (kbd "M-n") 'my/move-line-down)
+(global-set-key (kbd "M-p") 'my/move-line-up)
 (global-set-key (kbd "C-'") 'my/dup-line)
 (global-set-key (kbd "C-;") 'kill-whole-line)
 (global-set-key (kbd "C-c r") 'my/reload-init-file)
