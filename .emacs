@@ -116,14 +116,18 @@
 (global-set-key (kbd "C-;") 'kill-whole-line)
 (global-set-key (kbd "C-c r") 'my/reload-init-file)
 (global-set-key (kbd "C-c c") 'compile)
+(global-set-key (kbd "C-c v") 'recompile)
 
 ;; Stop Emacs littering directories with autosave files
 (setq backup-directory-alist
       `(("." . ,(concat user-emacs-directory "backups"))))
 
 ;; Uncomment desired font
-(add-to-list 'default-frame-alist '(font . "Iosevka Term-14"))
-(set-face-attribute 'default nil :font "Iosevka Term-14")
+(add-to-list 'default-frame-alist '(font . "Iosevka-14"))
+(set-face-attribute 'default nil :font "Iosevka-14")
+
+;;(add-to-list 'default-frame-alist '(font . "monospace-14"))
+;;(set-face-attribute 'default nil :font "monospace-14")
 
 ;;(add-to-list 'default-frame-alist '(font . "Liberation Mono-14"))
 ;;(set-face-attribute 'default nil :font "Liberation Mono-14")
@@ -137,8 +141,8 @@
 ;;(add-to-list 'default-frame-alist '(font . "Inconsolata-14"))
 ;;(set-face-attribute 'default nil :font "Inconsolata-14")
 
-;;(add-to-list 'default-frame-alist '(font . "Source Code Pro-12"))
-;;(set-face-attribute 'default nil :font "Source Code Pro-12")
+(add-to-list 'default-frame-alist '(font . "Source Code Pro Medium-12"))
+(set-face-attribute 'default nil :font "Source Code Pro Medium-12")
 
 ;; Programming langauge stuff
 (defun my-c-mode-hook ()
@@ -159,7 +163,7 @@
  '(company-quickhelp-color-background "#4F4F4F")
  '(company-quickhelp-color-foreground "#DCDCCC")
  '(custom-safe-themes
-   '("b77a00d5be78f21e46c80ce450e5821bdc4368abf4ffe2b77c5a66de1b648f10" "3d2e532b010eeb2f5e09c79f0b3a277bfc268ca91a59cdda7ffd056b868a03bc" "835868dcd17131ba8b9619-12c67c127aa18b90a82438c8613586331129dda63" "03e26cd42c3225e6376d7808c946f7bed6382d795618a82c8f3838cd2097a9cc" "3b8284e207ff93dfc5e5ada8b7b00a3305351a3fb222782d8033a400a48eca48" default))
+   '("835868dcd17131ba8b9619d14c67c127aa18b90a82438c8613586331129dda63" "b77a00d5be78f21e46c80ce450e5821bdc4368abf4ffe2b77c5a66de1b648f10" "3d2e532b010eeb2f5e09c79f0b3a277bfc268ca91a59cdda7ffd056b868a03bc" "835868dcd17131ba8b9619-12c67c127aa18b90a82438c8613586331129dda63" "03e26cd42c3225e6376d7808c946f7bed6382d795618a82c8f3838cd2097a9cc" "3b8284e207ff93dfc5e5ada8b7b00a3305351a3fb222782d8033a400a48eca48" default))
  '(exwm-floating-border-color "#191b20")
  '(fci-rule-color "#383838")
  '(frame-brackground-mode 'dark)
