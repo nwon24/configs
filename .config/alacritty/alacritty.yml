@@ -177,6 +177,9 @@ font:
   #use_thin_strokes: true
 
 # If `true`, bold text is drawn using the bright color variants.
+# One dark
+#draw_bold_text_with_bright_colors: false
+# Zenburn
 draw_bold_text_with_bright_colors: true
 
 # Colors (One Dark - https://github.com/atom/atom/tree/master/packages/one-dark-syntax)
