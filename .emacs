@@ -22,10 +22,6 @@
 (when (not server-name)
   (server-start))
 
-(setq ido-enable-flex-matching t)
-(setq ido-everywhere t)
-(ido-mode 1)
-
 ;; A few useful packages
 (require 'package)
 (add-to-list 'package-archives
@@ -68,13 +64,29 @@
 (global-set-key [remap kill-ring-save] 'easy-kill)
 
 (use-package haskell-mode
+  :ensure t
+  :init
+  (helm-mode 1))
+
+(use-package helm
   :ensure t)
+(use-package company
+  :ensure t
+  :init
+  (company-mode 1))
 
 (require 'multiple-cursors)
 (global-set-key (kbd "C-S-c C-S-c") 'mc/edit-lines)
 (global-set-key (kbd "C->") 'mc/mark-next-like-this)
 (global-set-key (kbd "C-<") 'mc/mark-previous-like-this)
 (global-set-key (kbd "C-c C-<") 'mc/mark-all-like-this)
+
+(global-set-key (kbd "C-c C-c") 'comment-or-uncomment-region)
+
+;; Put this after ivy so that we get ido-switch-buffer instead of ivy-switch-buffer
+(setq ido-enable-flex-matching t)
+(setq ido-everywhere t)
+(ido-mode 1)
 
 (require 'projectile)
 (define-key projectile-mode-map (kbd "C-c p") 'projectile-command-map)
@@ -141,8 +153,8 @@
 ;;(add-to-list 'default-frame-alist '(font . "Inconsolata-14"))
 ;;(set-face-attribute 'default nil :font "Inconsolata-14")
 
-(add-to-list 'default-frame-alist '(font . "Source Code Pro Medium-12"))
-(set-face-attribute 'default nil :font "Source Code Pro Medium-12")
+;;(add-to-list 'default-frame-alist '(font . "Source Code Pro Medium-12"))
+;;(set-face-attribute 'default nil :font "Source Code Pro Medium-12")
 
 ;; Programming langauge stuff
 (defun my-c-mode-hook ()
@@ -178,8 +190,9 @@
  '(nrepl-message-colors
    '("#CC9393" "#DFAF8F" "#F0DFAF" "#7F9F7F" "#BFEBBF" "#93E0E3" "#94BFF3" "#DC8CC3"))
  '(objed-cursor-color "#ff6c6b")
+ '(org-agenda-files '("~/org/agenda.org"))
  '(package-selected-packages
-   '(haskell-mode neotree emacs-neotree projectile multiple-cursors fasm-mode magit zenburn-theme use-package))
+   '(company helm haskell-mode neotree emacs-neotree projectile multiple-cursors fasm-mode magit zenburn-theme use-package))
  '(pdf-view-midnight-colors '("#DCDCCC" . "#383838"))
  '(rustic-ansi-faces
    ["#282c34" "#ff6c6b" "#98be65" "#ECBE7B" "#51afef" "#c678dd" "#46D9FF" "#bbc2cf"])
