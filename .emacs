@@ -5,6 +5,8 @@
 (tool-bar-mode -1)
 (menu-bar-mode -1)
 
+(setq inhibit-startup-message t)
+
 ;; Show trailing whitespace and set a keybinding to delete it
 (setq-default show-trailing-whitespace t)
 (global-set-key (kbd "C-c d t") 'delete-trailing-whitespace)
@@ -74,7 +76,7 @@
 (use-package company
   :ensure t
   :init
-  (company-mode 1))
+  (company-mode))
 
 (require 'multiple-cursors)
 (global-set-key (kbd "C-S-c C-S-c") 'mc/edit-lines)
@@ -136,11 +138,11 @@
       `(("." . ,(concat user-emacs-directory "backups"))))
 
 ;; Uncomment desired font
-;;(add-to-list 'default-frame-alist '(font . "Iosevka-14"))
-;;(set-face-attribute 'default nil :font "Iosevka-14")
+(add-to-list 'default-frame-alist '(font . "Iosevka-14"))
+(set-face-attribute 'default nil :font "Iosevka-14")
 
-(add-to-list 'default-frame-alist '(font . "monospace-14"))
-(set-face-attribute 'default nil :font "monospace-14")
+;;(add-to-list 'default-frame-alist '(font . "monospace-14"))
+;;(set-face-attribute 'default nil :font "monospace-14")
 
 ;;(add-to-list 'default-frame-alist '(font . "Liberation Mono-14"))
 ;;(set-face-attribute 'default nil :font "Liberation Mono-14")
