@@ -65,11 +65,12 @@
 
 (use-package haskell-mode
   :ensure t
-  :init
-  (helm-mode 1))
+  :init)
 
 (use-package helm
-  :ensure t)
+  :ensure t
+  :init
+  (helm-mode))
 (use-package company
   :ensure t
   :init
@@ -84,9 +85,9 @@
 (global-set-key (kbd "C-c C-c") 'comment-or-uncomment-region)
 
 ;; Put this after ivy so that we get ido-switch-buffer instead of ivy-switch-buffer
-(setq ido-enable-flex-matching t)
-(setq ido-everywhere t)
-(ido-mode 1)
+;;(setq ido-enable-flex-matching t)
+;;(setq ido-everywhere t)
+;;(ido-mode 1)
 
 (require 'projectile)
 (define-key projectile-mode-map (kbd "C-c p") 'projectile-command-map)
@@ -135,11 +136,11 @@
       `(("." . ,(concat user-emacs-directory "backups"))))
 
 ;; Uncomment desired font
-(add-to-list 'default-frame-alist '(font . "Iosevka-14"))
-(set-face-attribute 'default nil :font "Iosevka-14")
+;;(add-to-list 'default-frame-alist '(font . "Iosevka-14"))
+;;(set-face-attribute 'default nil :font "Iosevka-14")
 
-;;(add-to-list 'default-frame-alist '(font . "monospace-14"))
-;;(set-face-attribute 'default nil :font "monospace-14")
+(add-to-list 'default-frame-alist '(font . "monospace-14"))
+(set-face-attribute 'default nil :font "monospace-14")
 
 ;;(add-to-list 'default-frame-alist '(font . "Liberation Mono-14"))
 ;;(set-face-attribute 'default nil :font "Liberation Mono-14")
