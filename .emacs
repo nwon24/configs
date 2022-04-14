@@ -1,4 +1,5 @@
 ;; ~/.emacs.d/init.el
+;; The stuff here changes often because my opinions change quite often.
 
 ;; Basics
 (scroll-bar-mode -1)
@@ -13,6 +14,9 @@
 
 ;; Remove all alarms/bells
 (setq ring-bell-function 'ignore)
+
+;; Global highlighting mode
+(global-hl-line-mode 1)
 
 ;; Relative line numbers if supported
 (when (version<= "26.0.50" emacs-version)
@@ -34,6 +38,22 @@
 (unless (package-installed-p 'use-package)
   (package-install 'use-package))
 
+(use-package evil
+  :ensure t
+  :init
+  (setq evil-want-keybinding nil)
+  (evil-mode 1))
+(use-package evil-collection
+  :ensure t
+  :after evil
+  :config
+  (evil-collection-init))
+(use-package evil-escape
+  :ensure t
+  :config
+  (setq-default evil-escape-key-sequence "jk")
+  (evil-escape-mode 1))
+
 ;; Some nice themes
 (use-package zenburn-theme
   :ensure t)
@@ -41,9 +61,27 @@
   :ensure t)
 (use-package doom-themes
   :ensure t)
-(load-theme 'zenburn t)
+(use-package solarized-theme
+  :ensure t)
+;;(load-theme 'zenburn t)
 ;;(load-theme 'gruber-darker t)
 ;;(load-theme 'doom-one t)
+
+(defun load-solarized (type)
+  "Load solarized theme: light or dark"
+  (interactive)
+  (if (= type 1)
+      (load-theme 'solarized-dark t)
+    (load-theme 'solarized-light t))
+  (setq solarized-istinct-fringe-background t)
+  (setq solarized-use-variable-pitch nil)
+  (setq solarized-high-contrast-mode-line t)
+  (setq solarized-height-plus-1 1.0)
+  (setq solarized-height-plus-2 1.0)
+  (setq solarized-height-plus-3 1.0)
+  (setq solarized-height-plus-4 1.0))
+
+(load-solarized 1)
 
 ;; Other useful packages
 (use-package magit
@@ -78,13 +116,21 @@
   :init
   (company-mode))
 
-(require 'multiple-cursors)
-(global-set-key (kbd "C-S-c C-S-c") 'mc/edit-lines)
-(global-set-key (kbd "C->") 'mc/mark-next-like-this)
-(global-set-key (kbd "C-<") 'mc/mark-previous-like-this)
-(global-set-key (kbd "C-c C-<") 'mc/mark-all-like-this)
+;; Multiple cursors for use with evil mode
+(use-package evil-multiedit
+  :ensure t)
 
-(global-set-key (kbd "C-c C-c") 'comment-or-uncomment-region)
+;; The original multiple cursors doesn't really work with evil-mode
+;;(require 'multiple-cursors)
+;;(global-set-key (kbd "C-S-c C-S-c") 'mc/edit-lines)
+;;(global-set-key (kbd "C->") 'mc/mark-next-like-this)
+;;(global-set-key (kbd "C-<") 'mc/mark-previous-like-this)
+;;(global-set-key (kbd "C-c C-<") 'mc/mark-all-like-this)
+;;
+;;(global-set-key (kbd "C-c C-c") 'comment-or-uncomment-region)
+
+(require 'evil-multiedit)
+(evil-multiedit-default-keybinds)
 
 ;; Put this after ivy so that we get ido-switch-buffer instead of ivy-switch-buffer
 ;;(setq ido-enable-flex-matching t)
@@ -138,8 +184,8 @@
       `(("." . ,(concat user-emacs-directory "backups"))))
 
 ;; Uncomment desired font
-(add-to-list 'default-frame-alist '(font . "Iosevka-14"))
-(set-face-attribute 'default nil :font "Iosevka-14")
+;;(add-to-list 'default-frame-alist '(font . "Iosevka-14"))
+;;(set-face-attribute 'default nil :font "Iosevka-14")
 
 ;;(add-to-list 'default-frame-alist '(font . "monospace-14"))
 ;;(set-face-attribute 'default nil :font "monospace-14")
@@ -153,8 +199,8 @@
 ;;(add-to-list 'default-frame-alist '(font . "Ubuntu Mono-14"))
 ;;(set-face-attribute 'default nil :font "Ubuntu Mono-14")
 
-;;(add-to-list 'default-frame-alist '(font . "Inconsolata-14"))
-;;(set-face-attribute 'default nil :font "Inconsolata-14")
+(add-to-list 'default-frame-alist '(font . "Inconsolata"))
+(set-face-attribute 'default nil :font "Inconsolata")
 
 ;;(add-to-list 'default-frame-alist '(font . "Source Code Pro Medium-12"))
 ;;(set-face-attribute 'default nil :font "Source Code Pro Medium-12")
@@ -174,14 +220,15 @@
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
  '(ansi-color-names-vector
-   ["#3F3F3F" "#CC9393" "#7F9F7F" "#F0DFAF" "#8CD0D3" "#DC8CC3" "#93E0E3" "#DCDCCC"])
+   ["#073642" "#dc322f" "#859900" "#b58900" "#268bd2" "#d33682" "#2aa198" "#657b83"])
  '(company-quickhelp-color-background "#4F4F4F")
  '(company-quickhelp-color-foreground "#DCDCCC")
  '(custom-safe-themes
-   '("835868dcd17131ba8b9619d14c67c127aa18b90a82438c8613586331129dda63" "b77a00d5be78f21e46c80ce450e5821bdc4368abf4ffe2b77c5a66de1b648f10" "3d2e532b010eeb2f5e09c79f0b3a277bfc268ca91a59cdda7ffd056b868a03bc" "835868dcd17131ba8b9619-12c67c127aa18b90a82438c8613586331129dda63" "03e26cd42c3225e6376d7808c946f7bed6382d795618a82c8f3838cd2097a9cc" "3b8284e207ff93dfc5e5ada8b7b00a3305351a3fb222782d8033a400a48eca48" default))
+   '("cf922a7a5c514fad79c483048257c5d8f242b21987af0db813d3f0b138dfaf53" "835868dcd17131ba8b9619d14c67c127aa18b90a82438c8613586331129dda63" "b77a00d5be78f21e46c80ce450e5821bdc4368abf4ffe2b77c5a66de1b648f10" "3d2e532b010eeb2f5e09c79f0b3a277bfc268ca91a59cdda7ffd056b868a03bc" "835868dcd17131ba8b9619-12c67c127aa18b90a82438c8613586331129dda63" "03e26cd42c3225e6376d7808c946f7bed6382d795618a82c8f3838cd2097a9cc" "3b8284e207ff93dfc5e5ada8b7b00a3305351a3fb222782d8033a400a48eca48" default))
  '(exwm-floating-border-color "#191b20")
  '(fci-rule-color "#383838")
  '(frame-brackground-mode 'dark)
+ '(helm-minibuffer-history-key "M-p")
  '(highlight-tail-colors
    ((("#333a38" "#99bb66" "green")
      . 0)
@@ -195,7 +242,7 @@
  '(objed-cursor-color "#ff6c6b")
  '(org-agenda-files '("~/org/agenda.org"))
  '(package-selected-packages
-   '(company helm haskell-mode neotree emacs-neotree projectile multiple-cursors fasm-mode magit zenburn-theme use-package))
+   '(evil-multiedit evil-escape evil-collection evil solarized-theme company helm haskell-mode neotree emacs-neotree projectile multiple-cursors fasm-mode magit zenburn-theme use-package))
  '(pdf-view-midnight-colors '("#DCDCCC" . "#383838"))
  '(rustic-ansi-faces
    ["#282c34" "#ff6c6b" "#98be65" "#ECBE7B" "#51afef" "#c678dd" "#46D9FF" "#bbc2cf"])
