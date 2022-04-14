@@ -1,4 +1,4 @@
-XTerm.vt100.faceName: monospace
+XTerm.vt100.faceName: Iosevka
 XTerm.vt100.faceSize: 14
 XTerm.vt100.metaSendsEscape: true
 XTerm.vt100.selectToClipboard: true
