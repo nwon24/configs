@@ -37,100 +37,85 @@
   (package-refresh-contents))
 (unless (package-installed-p 'use-package)
   (package-install 'use-package))
+(setq use-package-always-ensure t)
 
-(use-package evil
-  :ensure t
-  :init
-  (setq evil-want-keybinding nil)
-  (evil-mode 1))
-(use-package evil-collection
-  :ensure t
-  :after evil
-  :config
-  (evil-collection-init))
-(use-package evil-escape
-  :ensure t
-  :config
-  (setq-default evil-escape-key-sequence "jk")
-  (evil-escape-mode 1))
+;; Evil mode is evil
+;;(use-package evil
+  ;;:init
+  ;;(setq evil-want-keybinding nil)
+  ;;(evil-mode 1))
+;;(use-package evil-collection
+  ;;:after evil
+  ;;:config
+  ;;(evil-collection-init))
+;;(use-package evil-escape
+  ;;:config
+  ;;(setq-default evil-escape-key-sequence "jk")
+  ;;(evil-escape-mode 1))
 
 ;; Some nice themes
-(use-package zenburn-theme
-  :ensure t)
-(use-package gruber-darker-theme
-  :ensure t)
-(use-package doom-themes
-  :ensure t)
-(use-package solarized-theme
-  :ensure t)
-;;(load-theme 'zenburn t)
+(use-package zenburn-theme)
+(use-package gruber-darker-theme)
+(use-package doom-themes)
+(use-package solarized-theme)
+(load-theme 'zenburn t)
 ;;(load-theme 'gruber-darker t)
 ;;(load-theme 'doom-one t)
 
 (defun load-solarized (type)
   "Load solarized theme: light or dark"
   (interactive)
-  (if (= type 1)
-      (load-theme 'solarized-dark t)
-    (load-theme 'solarized-light t))
   (setq solarized-istinct-fringe-background t)
   (setq solarized-use-variable-pitch nil)
   (setq solarized-high-contrast-mode-line t)
   (setq solarized-height-plus-1 1.0)
   (setq solarized-height-plus-2 1.0)
   (setq solarized-height-plus-3 1.0)
-  (setq solarized-height-plus-4 1.0))
+  (setq solarized-height-plus-4 1.0)
+  (if (= type 1)
+      (load-theme 'solarized-dark t)
+    (load-theme 'solarized-light t)))
 
-(load-solarized 1)
+;;(load-solarized 1)
 
 ;; Other useful packages
-(use-package magit
-  :ensure t)
-(use-package nasm-mode
-  :ensure t)
-(use-package multiple-cursors
-  :ensure t)
+(use-package magit)
+(use-package nasm-mode)
+(use-package multiple-cursors)
 (use-package projectile
-  :ensure t)
-(use-package ivy
-  :ensure t)
+(use-package ivy)
 (ivy-mode)
-(use-package neotree
-  :ensure t)
+(use-package neotree)
 (global-set-key (kbd "C-c t") 'neotree-toggle)
 
-(use-package easy-kill
-  :ensure t)
+(use-package easy-kill)
 (global-set-key [remap kill-ring-save] 'easy-kill)
 
-(use-package haskell-mode
-  :ensure t
+(use-package haskell-mode)
   :init)
 
 (use-package helm
-  :ensure t
   :init
   (helm-mode))
 (use-package company
-  :ensure t
   :init
   (company-mode))
 
 ;; Multiple cursors for use with evil mode
-(use-package evil-multiedit
-  :ensure t)
+;;(use-package evil-multiedit
+;;  :ensure t)
 
 ;; The original multiple cursors doesn't really work with evil-mode
-;;(require 'multiple-cursors)
-;;(global-set-key (kbd "C-S-c C-S-c") 'mc/edit-lines)
-;;(global-set-key (kbd "C->") 'mc/mark-next-like-this)
-;;(global-set-key (kbd "C-<") 'mc/mark-previous-like-this)
-;;(global-set-key (kbd "C-c C-<") 'mc/mark-all-like-this)
-;;
-;;(global-set-key (kbd "C-c C-c") 'comment-or-uncomment-region)
+(require 'multiple-cursors)
+(global-set-key (kbd "C-S-c C-S-c") 'mc/edit-lines)
+(global-set-key (kbd "C->") 'mc/mark-next-like-this)
+(global-set-key (kbd "C-<") 'mc/mark-previous-like-this)
+(global-set-key (kbd "C-c C-<") 'mc/mark-all-like-this)
 
-(require 'evil-multiedit)
-(evil-multiedit-default-keybinds)
+(global-set-key (kbd "C-c C-c") 'comment-or-uncomment-region)
+
+;;(require 'evil-multiedit)
+;;(evil-multiedit-default-keybinds)
 
 ;; Put this after ivy so that we get ido-switch-buffer instead of ivy-switch-buffer
 ;;(setq ido-enable-flex-matching t)
@@ -184,33 +169,21 @@
       `(("." . ,(concat user-emacs-directory "backups"))))
 
 ;; Uncomment desired font
-;;(add-to-list 'default-frame-alist '(font . "Iosevka-14"))
-;;(set-face-attribute 'default nil :font "Iosevka-14")
+(add-to-list 'default-frame-alist '(font . "Iosevka-14"))
+(set-face-attribute 'default nil :font "Iosevka-14")
 
 ;;(add-to-list 'default-frame-alist '(font . "monospace-14"))
 ;;(set-face-attribute 'default nil :font "monospace-14")
 
-;;(add-to-list 'default-frame-alist '(font . "Liberation Mono-14"))
-;;(set-face-attribute 'default nil :font "Liberation Mono-14")
-
-;;(add-to-list 'default-frame-alist '(font . "Fira Code-12"))
-;;(set-face-attribute 'default nil :font "Fira Code-12")
-
-;;(add-to-list 'default-frame-alist '(font . "Ubuntu Mono-14"))
-;;(set-face-attribute 'default nil :font "Ubuntu Mono-14")
-
-(add-to-list 'default-frame-alist '(font . "Inconsolata"))
-(set-face-attribute 'default nil :font "Inconsolata")
-
-;;(add-to-list 'default-frame-alist '(font . "Source Code Pro Medium-12"))
-;;(set-face-attribute 'default nil :font "Source Code Pro Medium-12")
-
 ;; Programming langauge stuff
 (defun my-c-mode-hook ()
-  (local-unset-key (kbd "C-c C-p"))
-  (local-unset-key (kbd "C-c C-n"))
   (setq c-basic-offset 8))
 (add-hook 'c-mode-hook 'my-c-mode-hook)
+
+;; Org mode stuff
+;; When export to LaTeX untabify so that source code blocks are indented properly.
+(indent-tabs-mode -1)
+(setq org-src-preserve-indentation t)
 
 (setq debug-on-error t)
 
