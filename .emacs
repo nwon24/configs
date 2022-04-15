@@ -1,5 +1,6 @@
 ;; ~/.emacs.d/init.el
 ;; The stuff here changes often because my opinions change quite often.
+;; The stuff that is commented out is the stuff I toos around.
 
 ;; Basics
 (scroll-bar-mode -1)
@@ -82,9 +83,8 @@
 (use-package magit)
 (use-package nasm-mode)
 (use-package multiple-cursors)
-(use-package projectile
+(use-package projectile)
 (use-package ivy)
-(ivy-mode)
 (use-package neotree)
 (global-set-key (kbd "C-c t") 'neotree-toggle)
 
@@ -92,11 +92,10 @@
 (global-set-key [remap kill-ring-save] 'easy-kill)
 
 (use-package haskell-mode)
-  :init)
 
-(use-package helm
-  :init
-  (helm-mode))
+;;(use-package helm
+;;  :init
+;;  (helm-mode))
 (use-package company
   :init
   (company-mode))
@@ -118,9 +117,9 @@
 ;;(evil-multiedit-default-keybinds)
 
 ;; Put this after ivy so that we get ido-switch-buffer instead of ivy-switch-buffer
-;;(setq ido-enable-flex-matching t)
-;;(setq ido-everywhere t)
-;;(ido-mode 1)
+(setq ido-enable-flex-matching t)
+(setq ido-everywhere t)
+(ido-mode 1)
 
 (require 'projectile)
 (define-key projectile-mode-map (kbd "C-c p") 'projectile-command-map)
