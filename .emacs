@@ -84,7 +84,9 @@
 (use-package nasm-mode)
 (use-package multiple-cursors)
 (use-package projectile)
-(use-package ivy)
+(use-package ivy
+  :config
+  (ivy-mode))
 (use-package neotree)
 (global-set-key (kbd "C-c t") 'neotree-toggle)
 
