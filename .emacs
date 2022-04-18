@@ -17,7 +17,7 @@
 (setq ring-bell-function 'ignore)
 
 ;; Global highlighting mode
-(global-hl-line-mode 1)
+;;(global-hl-line-mode 1)
 
 ;; Relative line numbers if supported
 (when (version<= "26.0.50" emacs-version)
@@ -94,13 +94,16 @@
 (global-set-key [remap kill-ring-save] 'easy-kill)
 
 (use-package haskell-mode)
+;; A useful package for expanding selected region by semantic units
+(use-package expand-region
+  :bind ("C-=" . er/expand-region))
 
 ;;(use-package helm
 ;;  :init
 ;;  (helm-mode))
 (use-package company
   :init
-  (company-mode))
+  (company-mode 1))
 
 ;; Multiple cursors for use with evil mode
 ;;(use-package evil-multiedit
@@ -173,8 +176,8 @@
 (add-to-list 'default-frame-alist '(font . "Iosevka-14"))
 (set-face-attribute 'default nil :font "Iosevka-14")
 
-;;(add-to-list 'default-frame-alist '(font . "monospace-14"))
-;;(set-face-attribute 'default nil :font "monospace-14")
+;;(add-to-list 'default-frame-alist '(font . "Source Code Pro Medium-12"))
+;;(set-face-attribute 'default nil :font "Source Code Pro Medium-12")
 
 ;; Programming langauge stuff
 (defun my-c-mode-hook ()
@@ -194,11 +197,11 @@
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
  '(ansi-color-names-vector
-   ["#073642" "#dc322f" "#859900" "#b58900" "#268bd2" "#d33682" "#2aa198" "#657b83"])
+   ["#eee8d5" "#dc322f" "#859900" "#b58900" "#268bd2" "#d33682" "#2aa198" "#839496"])
  '(company-quickhelp-color-background "#4F4F4F")
  '(company-quickhelp-color-foreground "#DCDCCC")
  '(custom-safe-themes
-   '("cf922a7a5c514fad79c483048257c5d8f242b21987af0db813d3f0b138dfaf53" "835868dcd17131ba8b9619d14c67c127aa18b90a82438c8613586331129dda63" "b77a00d5be78f21e46c80ce450e5821bdc4368abf4ffe2b77c5a66de1b648f10" "3d2e532b010eeb2f5e09c79f0b3a277bfc268ca91a59cdda7ffd056b868a03bc" "835868dcd17131ba8b9619-12c67c127aa18b90a82438c8613586331129dda63" "03e26cd42c3225e6376d7808c946f7bed6382d795618a82c8f3838cd2097a9cc" "3b8284e207ff93dfc5e5ada8b7b00a3305351a3fb222782d8033a400a48eca48" default))
+   '("fc48cc3bb3c90f7761adf65858921ba3aedba1b223755b5924398c666e78af8b" "333958c446e920f5c350c4b4016908c130c3b46d590af91e1e7e2a0611f1e8c5" "234dbb732ef054b109a9e5ee5b499632c63cc24f7c2383a849815dacc1727cb6" "4c56af497ddf0e30f65a7232a8ee21b3d62a8c332c6b268c81e9ea99b11da0d3" "cf922a7a5c514fad79c483048257c5d8f242b21987af0db813d3f0b138dfaf53" "835868dcd17131ba8b9619d14c67c127aa18b90a82438c8613586331129dda63" "b77a00d5be78f21e46c80ce450e5821bdc4368abf4ffe2b77c5a66de1b648f10" "3d2e532b010eeb2f5e09c79f0b3a277bfc268ca91a59cdda7ffd056b868a03bc" "835868dcd17131ba8b9619-12c67c127aa18b90a82438c8613586331129dda63" "03e26cd42c3225e6376d7808c946f7bed6382d795618a82c8f3838cd2097a9cc" "3b8284e207ff93dfc5e5ada8b7b00a3305351a3fb222782d8033a400a48eca48" default))
  '(exwm-floating-border-color "#191b20")
  '(fci-rule-color "#383838")
  '(frame-brackground-mode 'dark)
@@ -216,7 +219,7 @@
  '(objed-cursor-color "#ff6c6b")
  '(org-agenda-files '("~/org/agenda.org"))
  '(package-selected-packages
-   '(evil-multiedit evil-escape evil-collection evil solarized-theme company helm haskell-mode neotree emacs-neotree projectile multiple-cursors fasm-mode magit zenburn-theme use-package))
+   '(expand-region evil-multiedit evil-escape evil-collection evil solarized-theme company helm haskell-mode neotree emacs-neotree projectile multiple-cursors fasm-mode magit zenburn-theme use-package))
  '(pdf-view-midnight-colors '("#DCDCCC" . "#383838"))
  '(rustic-ansi-faces
    ["#282c34" "#ff6c6b" "#98be65" "#ECBE7B" "#51afef" "#c678dd" "#46D9FF" "#bbc2cf"])
