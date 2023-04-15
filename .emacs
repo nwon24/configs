@@ -4,6 +4,9 @@
 (tool-bar-mode 0)
 (scroll-bar-mode 0)
 
+;; (add-to-list 'load-path "~/.emacs.d/lib")
+;; (load-library "cweb")
+
 (setq ring-bell-function 'ignore)
 
 (setq inhibit-splash-screen t)
@@ -37,6 +40,11 @@
 (use-package zenburn-theme
   :config
   (load-theme 'zenburn t))
+
+(use-package tex
+  :ensure auctex
+  :init
+  (setq-default TeX-engine 'luatex))
 
 (use-package smex
   :bind (("M-x" . smex)
@@ -116,9 +124,9 @@
   (setq c-basic-offset 4))
 (add-hook 'c-mode-hook 'my-c-mode-hook)
 
-(add-to-list 'default-frame-alist '(font . "Iosevka-16" ))
-(set-face-attribute 'default t :font "Iosevka-16" )
-(set-frame-font "Iosevka-16" nil t)
+(add-to-list 'default-frame-alist '(font . "JetBrains Mono-16" ))
+(set-face-attribute 'default t :font "JetBrains Mono-16" )
+(set-frame-font "JetBrains Mono-16" nil t)
 
 (setq-default asm-comment-char ?\#)
 
@@ -133,7 +141,7 @@
    '("2dc03dfb67fbcb7d9c487522c29b7582da20766c9998aaad5e5b63b5c27eec3f" "bddf21b7face8adffc42c32a8223c3cc83b5c1bbd4ce49a5743ce528ca4da2b6" default))
  '(org-export-backends '(ascii html icalendar latex md odt))
  '(package-selected-packages
-   '(gruber-darker-theme yasnippet-snippets avy company iy-go-to-char key-chord ace-jump-mode easy-kill-extras markdown-mode forth-mode projectile expand-region magit smex drag-stuff move-dup move-text easy-kill multiple-cursors zenburn-theme use-package)))
+   '(auctex gruber-darker-theme yasnippet-snippets avy company iy-go-to-char key-chord ace-jump-mode easy-kill-extras markdown-mode forth-mode projectile expand-region magit smex drag-stuff move-dup move-text easy-kill multiple-cursors zenburn-theme use-package)))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
